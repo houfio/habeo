@@ -13,7 +13,7 @@ import styles from './App.module.scss';
 export const App = defineComponent({
   setup: () => {
     useClient({
-      url: process.env.VITE_API_URL ?? ''
+      url: import.meta.env.VITE_API_URL
     });
 
     const { state, commit } = useStore();
