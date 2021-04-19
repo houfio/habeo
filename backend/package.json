@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "nest start --watch",
     "build": "rimraf dist && nest build",
-    "serve": "node dist/main"
+    "serve": "node dist/main",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
