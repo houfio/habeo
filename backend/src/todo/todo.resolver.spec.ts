@@ -31,4 +31,13 @@ describe('TodoResolver', () =>{
       await expect( resolver.findOne("1")).resolves.toBe(result);
     });
   })
+
+  describe('create', () => {
+    it('should create a todo', async () => {
+      const result = {id: 1,title: 'title', text: 'text', icon:'icon', completedAt: null };
+      jest.spyOn(todoService, 'create').mockImplementation(() => Promise.resolve(result))
+
+      await expect(resolver.create({title: 'title', text: 'text', icon:'icon'})).resolves.toBe(result);
+    });
+  })
 })
