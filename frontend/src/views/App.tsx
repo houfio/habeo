@@ -2,6 +2,8 @@ import { defineComponent } from 'vue';
 
 import { useStore } from '../composables/useStore';
 
+import styles from './App.module.scss';
+
 export default defineComponent({
   setup() {
     const { state, commit } = useStore();
@@ -13,7 +15,9 @@ export default defineComponent({
         </button>
         {state.todos.map((todo, i) => (
           <div key={i}>
-            {todo.text}
+            <button class={styles.todo} data-done={todo.done} onClick={() => commit('toggleDone', todo)}>
+              {todo.text}
+            </button>
           </div>
         ))}
       </div>
