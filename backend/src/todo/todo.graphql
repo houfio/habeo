@@ -1,15 +1,13 @@
 type Todo {
   id: ID!
-  title: String!
-  icon: String!
   text: String!
+  icon: String!
   completedAt: String
 }
 
 input CreateTodoInput {
-  title: String!
-  icon: String!
   text: String!
+  icon: String!
 }
 
 type Query {
