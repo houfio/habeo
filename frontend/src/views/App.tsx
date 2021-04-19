@@ -1,4 +1,6 @@
-import { defineComponent, reactive } from 'vue';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core';
+import { DefaultApolloClient } from '@vue/apollo-composable';
+import { defineComponent, provide, reactive } from 'vue';
 
 import { useStore } from '../composables/useStore';
 import { Container } from '../components/layout/Container';
@@ -9,8 +11,17 @@ import { icons } from '../constants';
 
 import styles from './App.module.scss';
 
+const client = new ApolloClient({
+  link: createHttpLink({
+    uri: 'http://localhost:8000/graphql'
+  }),
+  cache: new InMemoryCache()
+});
+
 export default defineComponent({
   setup: () => {
+    provide(DefaultApolloClient, client);
+
     const { state, commit } = useStore();
     const todo = reactive({
       text: '',

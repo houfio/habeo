@@ -14,7 +14,7 @@ export const TodoItem = defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup: (props) => {
     const { todo } = props;
     const { commit } = useStore();
 
