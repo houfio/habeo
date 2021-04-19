@@ -30,7 +30,7 @@ describe('TodoResolver', () =>{
 
       await expect( resolver.findOne("1")).resolves.toBe(result);
     });
-  })
+  });
 
   describe('create', () => {
     it('should create a todo', async () => {
@@ -39,5 +39,15 @@ describe('TodoResolver', () =>{
 
       await expect(resolver.create({title: 'title', text: 'text', icon:'icon'})).resolves.toBe(result);
     });
-  })
+  });
+
+  describe('remove', () => {
+    it('should remove todo', async () => {
+      const result = {id: 1,title: 'title', text: 'text', icon:'icon', completedAt: null };
+      jest.spyOn(todoService, 'remove').mockImplementation(() => Promise.resolve(result))
+
+      await expect(resolver.remove("1")).resolves.toBe(result);
+    });
+  });
+
 })
