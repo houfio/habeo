@@ -18,17 +18,17 @@ export class TodoService {
 
   async findOne(id: string) {
     return await this.prisma.todo.findFirst({
-      where: { id: parseInt(id) }
+      where: { id }
     });
   }
 
   async toggle(id: string) {
     const todo = await this.prisma.todo.findFirst({
-      where: { id: parseInt(id) }
+      where: { id }
     });
 
     return await this.prisma.todo.update({
-      where: { id: parseInt(id) },
+      where: { id },
       data: {
         completedAt: todo.completedAt ? null : new Date()
       }
@@ -37,7 +37,7 @@ export class TodoService {
 
   async remove(id: string) {
     return await this.prisma.todo.delete({
-      where: { id: parseInt(id) }
+      where: { id }
     })
   }
 }
