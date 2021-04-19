@@ -1,32 +1,36 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+
+import { TodoModel } from '../models/todo.model';
+
 import { TodoService } from './todo.service';
 
 @Resolver('Todo')
 export class TodoResolver {
-  constructor(private readonly todoService: TodoService) {}
+  constructor(private readonly todo: TodoService) {
+  }
 
   @Query('todos')
   findAll() {
-    return this.todoService.findAll();
+    return this.todo.findAll();
   }
 
   @Query('todo')
   findOne(@Args('id') id: string) {
-    return this.todoService.findOne(id);
+    return this.todo.findOne(id);
   }
 
   @Mutation('createTodo')
-  create(@Args('data') data: any) {
-    return this.todoService.create(data);
+  create(@Args('data') data: TodoModel) {
+    return this.todo.create(data);
   }
 
   @Mutation('toggleCompleted')
   toggle(@Args('id') id: string) {
-    return this.todoService.toggle(id);
+    return this.todo.toggle(id);
   }
 
   @Mutation('removeTodo')
   remove(@Args('id') id: string) {
-    return this.todoService.remove(id);
+    return this.todo.remove(id);
   }
 }

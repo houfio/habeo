@@ -1,46 +1,41 @@
 import { Injectable } from '@nestjs/common';
-import {PrismaService} from "../services/prisma.service";
+
+import { TodoModel } from '../models/todo.model';
+import { PrismaService } from '../services/prisma.service';
 
 @Injectable()
 export class TodoService {
-  constructor(private readonly prismaService: PrismaService) {
+  constructor(private readonly prisma: PrismaService) {
   }
 
-  create(data: any) {
-    const todo = this.prismaService.todo.create({
-      data:{
-        title: data.title,
-        icon:  data.icon,
-        text:  data.text,
-      },
-    })
-    return todo
+  async create(data: TodoModel) {
+    return await this.prisma.todo.create({ data });
   }
 
-  findAll() {
-    return this.prismaService.todo.findMany();
+  async findAll() {
+    return await this.prisma.todo.findMany();
   }
 
-  findOne(id: string) {
-    return this.prismaService.todo.findFirst({
-      where: { id: parseInt(id) },
-    })
+  async findOne(id: string) {
+    return await this.prisma.todo.findFirst({
+      where: { id: parseInt(id) }
+    });
   }
 
   async toggle(id: string) {
-    const todo = await this.prismaService.todo.findFirst({
-      where: { id: parseInt(id) },
-    })
-
-    return this.prismaService.todo.update({
-      where: {id: parseInt(id)},
-      data: {completedAt: todo.completedAt? null: new Date()},
+    const todo = await this.prisma.todo.findFirst({
+      where: { id: parseInt(id) }
     });
 
-    return todo;
+    return await this.prisma.todo.update({
+      where: { id: parseInt(id) },
+      data: {
+        completedAt: todo.completedAt ? null : new Date()
+      }
+    });
   }
 
-  remove(id: string) {
+  async remove(id: string) {
     return `This action removes a #${id} todo`;
   }
 }
