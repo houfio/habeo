@@ -1,0 +1,8 @@
+mutation CreateTodo($todo: String!, $icon: String!) {
+  createTodo(data: { text: $todo, icon: $icon }) {
+    id
+    text
+    icon
+    completedAt
+  }
+}

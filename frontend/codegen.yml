@@ -1,0 +1,12 @@
+schema: "http://localhost:8000/graphql"
+watch: true
+documents: "src/queries/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typed-document-node"
+  schema.graphql:
+    plugins:
+      - schema-ast

@@ -1,5 +1,5 @@
 import { defineComponent, reactive } from 'vue';
-import { useClient } from 'villus';
+import { useMutation } from 'villus';
 
 import { useStore } from '../composables/useStore';
 import { Container } from '../components/layout/Container';
@@ -7,16 +7,14 @@ import { Input } from '../components/forms/Input';
 import { TodoItem } from '../components/TodoItem';
 import { Icons } from '../components/forms/Icons';
 import { icons } from '../constants';
+import { CreateTodoDocument } from '../generated/graphql';
 
 import styles from './App.module.scss';
 
 export const App = defineComponent({
   setup: () => {
-    useClient({
-      url: import.meta.env.VITE_API_URL
-    });
-
     const { state, commit } = useStore();
+    const { execute } = useMutation(CreateTodoDocument);
     const todo = reactive({
       text: '',
       icon: Object.keys(icons)[0]
