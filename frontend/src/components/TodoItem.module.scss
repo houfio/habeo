@@ -1,0 +1,16 @@
+.item {
+  margin: 0 2rem 2rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--gray-100);
+  border-radius: 12px;
+  text-align: start;
+  transition: opacity .25s ease, box-shadow .25s ease;
+
+  &[data-done="true"] {
+    opacity: .25;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--gray-500);
+  }
+}
