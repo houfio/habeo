@@ -20,6 +20,8 @@
   }
 }
 
-.todo[data-done="true"] {
-  opacity: .5;
+.items {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0;
 }

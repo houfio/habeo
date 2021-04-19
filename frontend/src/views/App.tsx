@@ -3,6 +3,7 @@ import { defineComponent, reactive } from 'vue';
 import { useStore } from '../composables/useStore';
 import { Container } from '../components/Container';
 import { Input } from '../components/Input';
+import { TodoItem } from '../components/TodoItem';
 
 import styles from './App.module.scss';
 
@@ -39,13 +40,11 @@ export default defineComponent({
             <Input v-model={todo.text}/>
           </form>
         </div>
-        {state.todos.map((todo, i) => (
-          <div key={i}>
-            <button class={styles.todo} data-done={todo.done} onClick={() => commit('toggleDone', todo)}>
-              {todo.text}
-            </button>
-          </div>
-        ))}
+        <div class={styles.items}>
+          {state.todos.map((todo, i) => (
+            <TodoItem key={i} todo={todo}/>
+          ))}
+        </div>
       </Container>
     );
   }
