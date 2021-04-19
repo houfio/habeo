@@ -1,8 +1,8 @@
 import { defineComponent, reactive } from 'vue';
 
 import { useStore } from '../composables/useStore';
-import { Container } from '../components/Container';
-import { Input } from '../components/Input';
+import { Container } from '../components/layout/Container';
+import { Input } from '../components/forms/Input';
 import { TodoItem } from '../components/TodoItem';
 
 import styles from './App.module.scss';
