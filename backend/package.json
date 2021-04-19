@@ -6,7 +6,8 @@
     "build": "rimraf dist && nest build",
     "serve": "node dist/main",
     "test": "jest",
-    "migrate": "prisma migrate dev"
+    "migrate": "prisma migrate dev",
+    "prepare": "prisma generate"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
