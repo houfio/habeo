@@ -1,8 +1,5 @@
-mutation CreateTodo($todo: String!, $icon: String!) {
-  createTodo(data: { text: $todo, icon: $icon }) {
-    id
-    text
-    icon
-    completedAt
+mutation CreateTodo($text: String!, $icon: String!) {
+  createTodo(data: { text: $text, icon: $icon }) {
+    ...TodoFragment
   }
 }

@@ -1,23 +1,17 @@
 import { createStore } from 'vuex';
 
-import { Todo } from './types';
+import { TodoFragmentFragment } from './generated/graphql';
 
 export const store = createStore({
   state: {
-    todos: [] as Todo[]
+    todos: [] as TodoFragmentFragment[]
   },
   mutations: {
-    addItem(state, todo: Todo) {
-      state.todos.push(todo);
-    },
-    toggleDone(state, todo: Todo) {
-      const index = state.todos.indexOf(todo);
-
-      if (index === -1) {
-        return;
-      }
-
-      state.todos[index].done = !state.todos[index].done;
+    putItem(state, todo: TodoFragmentFragment) {
+      state.todos = [
+        ...state.todos.filter(({ id }) => id !== todo.id),
+        todo
+      ].sort((a, b) => a.id.localeCompare(b.id));
     }
   }
 });

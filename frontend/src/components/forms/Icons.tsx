@@ -7,7 +7,8 @@ import styles from './Icons.module.scss';
 
 export const Icons = defineComponent({
   props: {
-    modelValue: String
+    modelValue: String,
+    disabled: Boolean
   },
   setup: (props, { emit }) => () => (
     <div class={styles.wrapper}>
@@ -19,6 +20,7 @@ export const Icons = defineComponent({
             value={value}
             type="radio"
             checked={value === props.modelValue}
+            disabled={props.disabled}
             onInput={() => emit('update:modelValue', value)}
           />
           <label for={value}>
