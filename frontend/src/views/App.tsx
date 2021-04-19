@@ -4,6 +4,8 @@ import { useStore } from '../composables/useStore';
 import { Container } from '../components/layout/Container';
 import { Input } from '../components/forms/Input';
 import { TodoItem } from '../components/TodoItem';
+import { Icons } from '../components/forms/Icons';
+import { icons } from '../constants';
 
 import styles from './App.module.scss';
 
@@ -11,7 +13,8 @@ export default defineComponent({
   setup: () => {
     const { state, commit } = useStore();
     const todo = reactive({
-      text: ''
+      text: '',
+      icon: Object.keys(icons)[0]
     });
 
     const onSubmit = (e: Event) => {
@@ -25,6 +28,7 @@ export default defineComponent({
 
       commit('addItem', {
         text: trimmed,
+        icon: todo.icon,
         done: false
       });
       todo.text = '';
@@ -38,6 +42,9 @@ export default defineComponent({
           </h1>
           <form class={styles.form} onSubmit={onSubmit}>
             <Input v-model={todo.text}/>
+            <div class={styles.icons}>
+              <Icons v-model={todo.icon}/>
+            </div>
           </form>
         </div>
         <div class={styles.items}>

@@ -3,3 +3,7 @@ declare module '*.scss' {
 
   export default value;
 }
+
+declare module '@fortawesome/vue-fontawesome' {
+  export const FontAwesomeIcon: any;
+}
