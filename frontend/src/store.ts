@@ -18,6 +18,9 @@ export const store = createStore({
 
         t.completedAt = todo.completedAt;
       }
+    },
+    deleteItem: (state, id: string) => {
+      state.todos = state.todos.filter((todo) => todo.id != id);
     }
   }
 });

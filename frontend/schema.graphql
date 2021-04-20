@@ -6,7 +6,7 @@ input CreateTodoInput {
 type Mutation {
   createTodo(data: CreateTodoInput!): Todo!
   toggleCompleted(id: ID!): Todo!
-  removeTodo(id: ID!): Todo
+  deleteTodo(id: ID!): Todo
 }
 
 type Query {
