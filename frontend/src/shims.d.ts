@@ -1,7 +1,7 @@
-declare module '*.scss' {
-  const value: Record<string, string>;
+/// <reference types="vite/client" />
 
-  export default value;
+interface ImportMetaEnv {
+  VITE_API_URL: string;
 }
 
 declare module '@fortawesome/vue-fontawesome' {

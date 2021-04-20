@@ -1,0 +1,5 @@
+mutation ToggleTodo($id: ID!) {
+  toggleCompleted(id: $id) {
+    ...TodoFragment
+  }
+}
