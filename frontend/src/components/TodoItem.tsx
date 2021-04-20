@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { defineComponent, PropType } from 'vue';
 import { useMutation } from 'villus';
 
@@ -7,7 +8,6 @@ import { icons } from '../constants';
 import { DeleteTodoDocument, TodoFragmentFragment, ToggleTodoDocument } from '../generated/graphql';
 
 import styles from './TodoItem.module.scss';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoItem = defineComponent({
   props: {
@@ -40,19 +40,18 @@ export const TodoItem = defineComponent({
       if (data?.deleteTodo?.id) {
         commit('deleteItem', data.deleteTodo.id);
       }
-    }
+    };
 
     return () => (
-      <div class={styles.wrapper}>
-        <button class={styles.item} data-done={Boolean(todo.completedAt)} onClick={onClick}>
+      <div class={styles.wrapper} data-done={Boolean(todo.completedAt)}>
+        <button class={styles.item} onClick={onClick}>
           <FontAwesomeIcon class={styles.icon} icon={(icons as any)[todo.icon]} size="2x" fixedWidth={true}/>
           {todo.text}
         </button>
-        <button onClick={onClickDelete}>
-          <FontAwesomeIcon icon={faTrash}/>
+        <button class={styles.delete} onClick={onClickDelete}>
+          <FontAwesomeIcon class={styles.icon} icon={faTrash}/>
         </button>
       </div>
-
     );
   }
 });
