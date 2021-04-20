@@ -35,7 +35,7 @@ export class TodoService {
     });
   }
 
-  async remove(id: string) {
+  async delete(id: string) {
     return await this.prisma.todo.delete({
       where: { id }
     })

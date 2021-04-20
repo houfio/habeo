@@ -29,8 +29,8 @@ export class TodoResolver {
     return this.todo.toggle(id);
   }
 
-  @Mutation('removeTodo')
-  remove(@Args('id') id: string) {
-    return this.todo.remove(id);
+  @Mutation('deleteTodo')
+  delete(@Args('id') id: string) {
+    return this.todo.delete(id);
   }
 }
