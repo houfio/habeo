@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { defineComponent, PropType } from 'vue';
+import { useMutation } from 'villus';
 
 import { useStore } from '../composables/useStore';
 import { icons } from '../constants';
 import { TodoFragmentFragment, ToggleTodoDocument } from '../generated/graphql';
 
 import styles from './TodoItem.module.scss';
-import { useMutation } from 'villus';
 
 export const TodoItem = defineComponent({
   props: {
@@ -26,7 +26,7 @@ export const TodoItem = defineComponent({
       });
 
       if (data) {
-        commit('putItem', data.toggleCompleted);
+        commit('toggleCompleted', data.toggleCompleted);
       }
     };
 

@@ -7,11 +7,17 @@ export const store = createStore({
     todos: [] as TodoFragmentFragment[]
   },
   mutations: {
-    putItem(state, todo: TodoFragmentFragment) {
-      state.todos = [
-        ...state.todos.filter(({ id }) => id !== todo.id),
-        todo
-      ].sort((a, b) => a.id.localeCompare(b.id));
+    setItems: (state, todos: TodoFragmentFragment[]) => {
+      state.todos = todos.sort((a, b) => a.id.localeCompare(b.id));
+    },
+    toggleCompleted: (state, todo: TodoFragmentFragment) => {
+      for (const t of state.todos) {
+        if (t.id !== todo.id) {
+          continue;
+        }
+
+        t.completedAt = todo.completedAt;
+      }
     }
   }
 });

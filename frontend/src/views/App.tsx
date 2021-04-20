@@ -8,9 +8,9 @@ import { TodoItem } from '../components/TodoItem';
 import { Icons } from '../components/forms/Icons';
 import { icons } from '../constants';
 import { CreateTodoDocument, GetTodosDocument } from '../generated/graphql';
+import { Form } from '../components/forms/Form';
 
 import styles from './App.module.scss';
-import { Form } from '../components/forms/Form';
 
 export const App = defineComponent({
   setup: () => {
@@ -25,9 +25,7 @@ export const App = defineComponent({
     });
 
     watch(data, () => {
-      data.value?.todos.forEach((todo) => {
-        commit('putItem', todo);
-      });
+      commit('setItems', data.value?.todos);
     });
 
     const onSubmit = async () => {
@@ -43,7 +41,10 @@ export const App = defineComponent({
       });
 
       if (data) {
-        commit('putItem', data.createTodo);
+        commit('setItems', [
+          ...state.todos,
+          data.createTodo
+        ]);
         todo.text = '';
       }
     };
@@ -66,8 +67,8 @@ export const App = defineComponent({
           </Form>
         </div>
         <div class={styles.items}>
-          {state.todos.map((todo, i) => (
-            <TodoItem key={i} todo={todo}/>
+          {state.todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo}/>
           ))}
         </div>
       </Container>
