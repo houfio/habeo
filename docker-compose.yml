@@ -1,0 +1,25 @@
+services:
+  frontend:
+    build:
+      context: frontend
+      args:
+        api: http://localhost:3001/graphql
+    ports:
+      - 3000:80
+  backend:
+    build: backend
+    ports:
+      - 3001:8000
+    environment:
+      DATABASE_URL: mysql://root:password@database:3306/habeo
+    depends_on:
+      - database
+  database:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: habeo
+    volumes:
+      - habeo_data:/var/lib/mysql
+volumes:
+  habeo_data:
