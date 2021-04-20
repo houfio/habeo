@@ -4,9 +4,10 @@ import { useMutation } from 'villus';
 
 import { useStore } from '../composables/useStore';
 import { icons } from '../constants';
-import { TodoFragmentFragment, ToggleTodoDocument } from '../generated/graphql';
+import { DeleteTodoDocument, TodoFragmentFragment, ToggleTodoDocument } from '../generated/graphql';
 
 import styles from './TodoItem.module.scss';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoItem = defineComponent({
   props: {
@@ -19,6 +20,7 @@ export const TodoItem = defineComponent({
     const { todo } = props;
     const { commit } = useStore();
     const { execute } = useMutation(ToggleTodoDocument);
+    const { execute: executeDelete } = useMutation(DeleteTodoDocument);
 
     const onClick = async () => {
       const { data } = await execute({
@@ -30,11 +32,27 @@ export const TodoItem = defineComponent({
       }
     };
 
+    const onClickDelete = async () => {
+      const { data } = await executeDelete({
+        id: todo.id
+      });
+
+      if (data?.deleteTodo?.id) {
+        commit('deleteItem', data.deleteTodo.id);
+      }
+    }
+
     return () => (
-      <button class={styles.item} data-done={Boolean(todo.completedAt)} onClick={onClick}>
-        <FontAwesomeIcon class={styles.icon} icon={(icons as any)[todo.icon]} size="2x" fixedWidth={true}/>
-        {todo.text}
-      </button>
+      <div class={styles.wrapper}>
+        <button class={styles.item} data-done={Boolean(todo.completedAt)} onClick={onClick}>
+          <FontAwesomeIcon class={styles.icon} icon={(icons as any)[todo.icon]} size="2x" fixedWidth={true}/>
+          {todo.text}
+        </button>
+        <button onClick={onClickDelete}>
+          <FontAwesomeIcon icon={faTrash}/>
+        </button>
+      </div>
+
     );
   }
 });

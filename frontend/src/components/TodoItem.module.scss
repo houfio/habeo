@@ -1,5 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .item {
   position: relative;
+  flex-grow: 1;
   margin: 0 2rem 2rem;
   padding: 1rem 1.5rem;
   background-color: var(--gray-100);
